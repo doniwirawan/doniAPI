@@ -19,7 +19,7 @@ userSchema.plugin(uniqueValidator, { message: 'is already taken.' })
 userSchema.methods.setPassword = (password) => {
     this.salt = crypto.randomBytes(16).toString('hex');
     this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex')
-};
+}
 
 userSchema.methods.validPassword = (password) => {
     const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex')
@@ -36,7 +36,7 @@ userSchema.methods.generateJWT = () => {
         username: this.username,
         exp: parseInt(exp.getTime() / 1000),
     }, process.env.SECRET)
-};
+}
 
 userSchema.methods.toAuthJSON = () => {
     return {
@@ -45,7 +45,7 @@ userSchema.methods.toAuthJSON = () => {
         token: this.generateJWT(),
         bio: this.bio,
         image: this.image
-    };
-};
+    }
+}
 
 module.exports = mongoose.model('User', userSchema)
