@@ -1,15 +1,25 @@
 const jwt = require("jsonwebtoken")
-module.exports = function (req, res, next) {
-    const token = req.header("auth-token")
-    if (!token) return res.status(400).send("Access Denied!, no token entered")
 
-    try {
-        const verified = jwt.verify(token, process.env.SECRET);
-        req.user = verified
-        next()
-    } catch (err) {
-        res.status(400).send({
-            error: "auth failed, check auth-  token222"
-        });
-    }
+module.exports = function (req, res, next) {
+    // const token = req.header("auth-token")
+    // if (!token) return res.status(400).send("Access Denied!, no token entered")
+
+    // try {
+    //     const verified = jwt.verify(token, process.env.SECRET);
+    //     req.user = verified
+    //     next()
+    // } catch (err) {
+    //     res.status(400).send({
+    //         error: "auth failed, check auth-  token222"
+    //     });
+    // }
+
+    const token = req.headers['x-access-token'];
+    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+
+    jwt.verify(token, process.env.SECRET, function (err, decoded) {
+        if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+
+        res.status(200).send(decoded);
+    });
 };
