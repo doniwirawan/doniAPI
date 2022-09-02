@@ -6,6 +6,8 @@ const Article = require('./Models/Article.model')
 const Connection = require('./Config/Connection.db')
 const articleRouter = require('./Routers/Article.router')
 const userRouter = require('./Routers/User.router')
+require('dotenv').config()
+
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
