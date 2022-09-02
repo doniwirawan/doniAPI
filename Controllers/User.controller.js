@@ -16,6 +16,7 @@ const getUsers = async (req, res) => {
     }
 }
 
+
 const register = async (req, res) => {
     var hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
@@ -32,6 +33,10 @@ const register = async (req, res) => {
             });
             res.status(200).send({ auth: true, token: token });
         });
+}
+
+const login = async (req, res) => {
+
 }
 
 
@@ -51,6 +56,7 @@ const deleteUser = async (req, res) => {
 module.exports = {
     getUsers,
     register,
+    login,
     updateUser,
     editUser,
     deleteUser
