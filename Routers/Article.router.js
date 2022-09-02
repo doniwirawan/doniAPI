@@ -8,5 +8,6 @@ router.get('/articles', articleController.getArticles)
 router.post('/articles', auth, articleController.postArticles)
 router.put('/articles/:articleTitle', auth, articleController.updateArticle)
 router.patch('/articles/:articleTitle', auth, articleController.editArticle)
+router.delete('/articles/:articleTitle', auth, articleController.deleteArticle)
 
 module.exports = router

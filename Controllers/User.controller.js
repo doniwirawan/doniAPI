@@ -36,45 +36,22 @@ const register = async (req, res) => {
 
 
 const updateUser = async (req, res) => {
-    var hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
-    User.create({
-        username: req.body.username,
-        email: req.body.email,
-        password: hashedPassword
-    },
-        function (err, user) {
-            if (err) return res.status(500).send("There was a problem registering the user.")
-            // create a token
-            var token = jwt.sign({ id: user._id }, process.env.SECRET, {
-                expiresIn: 86400 // expires in 24 hours
-            });
-            res.status(200).send({ auth: true, token: token });
-        });
 }
 
 
 const editUser = async (req, res) => {
-    var hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
-    User.create({
-        username: req.body.username,
-        email: req.body.email,
-        password: hashedPassword
-    },
-        function (err, user) {
-            if (err) return res.status(500).send("There was a problem registering the user.")
-            // create a token
-            var token = jwt.sign({ id: user._id }, process.env.SECRET, {
-                expiresIn: 86400 // expires in 24 hours
-            });
-            res.status(200).send({ auth: true, token: token });
-        });
+}
+
+const deleteUser = async (req, res) => {
+
 }
 
 module.exports = {
     getUsers,
     register,
     updateUser,
-    editUser
+    editUser,
+    deleteUser
 }

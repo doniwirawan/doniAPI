@@ -35,45 +35,21 @@ const postArticles = async (req, res) => {
 }
 
 const updateArticle = async (req, res) => {
-    console.log(req.body)
-    const article = await new Article({
-        title: req.body.title,
-        content: req.body.content
-    })
 
-    console.log(article)
-
-    await article.save((err) => {
-        if (err) {
-            console.log(err)
-            return
-        }
-
-        res.json({ article: article })
-    })
 }
 
 const editArticle = async (req, res) => {
-    console.log(req.body)
-    const article = await new Article({
-        title: req.body.title,
-        content: req.body.content
-    })
 
-    console.log(article)
-
-    await article.save((err) => {
-        if (err) {
-            console.log(err)
-            return
-        }
-
-        res.json({ article: article })
-    })
 }
+
+const deleteArticle = async (req, res) => {
+
+}
+
 module.exports = {
     getArticles,
     postArticles,
     editArticle,
-    updateArticle
+    updateArticle,
+    deleteArticle
 }
